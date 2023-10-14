@@ -61,6 +61,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(),
                                         hintText: '+91 xxxxx xxxxx'),
+                                    keyboardType: TextInputType.number,
                                   ),
                                 ),
                                 Container(
