@@ -47,7 +47,7 @@ class SplashScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: 130),
+                    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height - 630),
                     child: Image.asset('assets/images/screen-1-burger.png'))
               ],
             ),
