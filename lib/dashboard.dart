@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_court/Item.dart';
 import 'package:food_court/orders.dart';
 import 'package:food_court/signInPage.dart';
+import 'package:food_court/userProfile.dart';
 import 'constants.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -42,7 +43,9 @@ class _DashboardPageState extends State<DashboardPage> {
               Icons.person,
               color: Colors.black,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfile()));
+            },
           )
         ],
         backgroundColor: Colors.transparent,
@@ -131,7 +134,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 margin: const EdgeInsets.only(top: 5),
                 padding: const EdgeInsets.all(5),
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
+                height: (specials.length * 100) % 2 == 0 ? (specials.length * 100) : (specials.length * 100) - 100,
                 child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -142,7 +145,6 @@ class _DashboardPageState extends State<DashboardPage> {
                   itemCount: specials.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      height: 500,
                       width: 200,
                       child: SingleItem(
                         index: index,
@@ -216,7 +218,6 @@ class _SingleItemState extends State<SingleItem> {
       },
       child: Container(
         width: MediaQuery.of(context).size.width / 2,
-        height: 500,
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -238,6 +239,9 @@ class _SingleItemState extends State<SingleItem> {
             ),
             Container(
               child: Text('Price: Rs. ${specials[widget.index].price}'),
+            ),
+            Container(
+              child: Text('Available at: ${specials[widget.index].storeName}'),
             )
           ],
         ),

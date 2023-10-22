@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_court/dashboard.dart';
+import 'package:food_court/signInPage.dart';
 
 class OtpVerify extends StatefulWidget {
   const OtpVerify({super.key});
@@ -56,7 +57,7 @@ class _OtpVerifyState extends State<OtpVerify> {
                   child: ElevatedButton(
                     onPressed: () {
                       print(_controller.text);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()));
                     },
                     child: Container(
                       child: Text("Verify!"),

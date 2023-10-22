@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_court/constants.dart';
 import 'package:food_court/dashboard.dart';
+import 'package:food_court/storeDashboard.dart';
 import 'package:http/http.dart' as http;
 import 'signUpPage.dart';
 
@@ -64,6 +66,7 @@ class _SignInPageState extends State<SignInPage> {
                             Container(
                               margin: const EdgeInsets.only(top: 10),
                               child: TextFormField(
+                                controller: _phoneControllers,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                     hintText: '+91 xxxxx xxxxx'),
@@ -76,6 +79,7 @@ class _SignInPageState extends State<SignInPage> {
                             Container(
                               margin: const EdgeInsets.only(top: 10),
                               child: TextFormField(
+                                controller: _passwordControllers,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                     hintText: '*****',
@@ -103,7 +107,24 @@ class _SignInPageState extends State<SignInPage> {
                             onPressed: () {
                               print(_phoneControllers.text);
                               print(_passwordControllers.text);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardPage()));
+
+                              if (_phoneControllers.text == userNumber && _passwordControllers.text == userPassword) {
+                                print('Sucess');
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardPage()));
+                              } else if (_phoneControllers.text == storeNumber && _passwordControllers.text == storePassword) {
+                                print('To Store');
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => StoreDashboard()));
+                              } else {
+                                final snackBar = SnackBar(
+                                  content: Text('The User not Found'),
+                                  action: SnackBarAction(
+                                    label: 'Undo',
+                                    onPressed: () {},
+                                  ),
+                                );
+
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }
                             },
                             child: Text(
                               'LOGIN',

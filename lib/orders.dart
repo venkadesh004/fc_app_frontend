@@ -29,101 +29,107 @@ class _OrderPageState extends State<OrderPage> {
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
-        body: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 30),
-              child: Text("Your Orders", style: TextStyle(
-                fontSize: 25,
-              ),),
-            ),
-            Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              child: ListView.builder(
-                itemCount: orders.length,
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width - 20,
-                    child: Center(
-                      child: Container(
-                        margin: const EdgeInsets.only(bottom: 15),
-                        height: 100,
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 30),
+                  child: Text("Your Orders", style: TextStyle(
+                    fontSize: 25,
+                  ),),
+                ),
+                Container(
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
+                  child: ListView.builder(
+                    itemCount: orders.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    physics: ScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
                         width: MediaQuery
                             .of(context)
                             .size
-                            .width - 40,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 100,
-                              height: 100,
-                              margin: const EdgeInsets.only(right: 20),
-                              child: ClipRect(child: Image.asset(
-                                  orders[index].itemImg)),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            .width - 20,
+                        child: Center(
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 15),
+                            height: 100,
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width - 40,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
-                                  child: Text(
-                                      "Item Name: ${orders[index]
-                                          .itemName}"
-                                  ),
+                                  width: 100,
+                                  height: 100,
+                                  margin: const EdgeInsets.only(right: 20),
+                                  child: ClipRect(child: Image.asset(
+                                      orders[index].itemImg)),
                                 ),
-                                Container(
-                                  child: Text(
-                                      "Quantity: ${orders[index]
-                                          .quantity}"
-                                  ),
-                                ),
-                                Container(
-                                  child: ElevatedButton(
-                                    child: Text("Cancel"),
-                                    onPressed: () {
-                                      setState(() {
-                                        orderPrice -=
-                                            orders[index].price *
-                                                orders[index].quantity;
-                                        orders.removeAt(index);
-                                      });
-                                    },
-                                  ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                          "Item Name: ${orders[index]
+                                              .itemName}"
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                          "Quantity: ${orders[index]
+                                              .quantity}"
+                                      ),
+                                    ),
+                                    Container(
+                                      child: ElevatedButton(
+                                        child: Text("Cancel"),
+                                        onPressed: () {
+                                          setState(() {
+                                            orderPrice -=
+                                                orders[index].price *
+                                                    orders[index].quantity;
+                                            orders.removeAt(index);
+                                          });
+                                        },
+                                      ),
+                                    )
+                                  ],
                                 )
                               ],
-                            )
-                          ],
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            Container(
-              width: 300,
-              child: ElevatedButton(
-                child: Text("Proceed to Pay", style: TextStyle(color: Colors.white),),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentSuccess()));
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)
+                      );
+                    },
                   ),
-                  backgroundColor: Color.fromRGBO(210, 29, 94, 1)
                 ),
-              ),
-            )
-          ],
+                Container(
+                  width: 300,
+                  child: ElevatedButton(
+                    child: Text("Proceed to Pay", style: TextStyle(color: Colors.white),),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentSuccess()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      backgroundColor: Color.fromRGBO(210, 29, 94, 1)
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );

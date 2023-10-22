@@ -61,7 +61,8 @@ class _ItemState extends State<Item> {
                   fit: BoxFit.contain,
                 )),
               ),
-              Container(child: Text("Price: Rs ${itemPrice}", style: TextStyle(fontSize: 18),), margin: const EdgeInsets.all(20),),
+              Container(child: Text("Store Name: ${specials[widget.index].storeName}", style: TextStyle(fontSize: 18),), margin: const EdgeInsets.all(20),),
+              Container(child: Text("Price: Rs ${itemPrice}", style: TextStyle(fontSize: 18),), margin: const EdgeInsets.only(left: 20, top: 10),),
               Container(
                 margin: const EdgeInsets.all(20),
                 child: Row(
@@ -111,7 +112,7 @@ class _ItemState extends State<Item> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.all(20),
+                margin: const EdgeInsets.only(left: 20, top: 10),
                 child: Text(
                   "Overall Price: ${overallPrice}",
                   style: TextStyle(
@@ -120,7 +121,7 @@ class _ItemState extends State<Item> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(left: 20, right: 20),
+                margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
                 width: 100,
                 height: 50,
                 child: ElevatedButton(
@@ -130,7 +131,7 @@ class _ItemState extends State<Item> {
                       setState(() {
                         orderPrice = overallPrice;
                         orders.add(
-                          SelectedItems(quantity: quantity, itemImg: specials[widget.index].itemImg, itemName: specials[widget.index].itemName, price: specials[widget.index].price)
+                          SelectedItems(quantity: quantity, itemImg: specials[widget.index].itemImg, itemName: specials[widget.index].itemName, price: specials[widget.index].price, storeName: specials[widget.index].storeName)
                         );
                       });
                       Navigator.push(context, MaterialPageRoute(builder: (context) => DashboardPage()));
